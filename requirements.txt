@@ -1,6 +1,6 @@
 seaborn
 plotly
-sklearn
+scikit-learn
 joblib
 nltk
 matplotlib

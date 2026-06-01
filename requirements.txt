@@ -1,0 +1,9 @@
+seaborn
+plotly
+sklearn
+joblib
+nltk
+matplotlib
+warnings
+numpy
+pandas

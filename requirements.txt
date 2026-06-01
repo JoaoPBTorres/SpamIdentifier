@@ -3,6 +3,6 @@ plotly
 scikit-learn
 joblib
 nltk
-matplotlib.pyplot
+matplotlib
 numpy
 pandas

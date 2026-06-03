@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detector Real - Grupo 15</title>
+    <style>
+        :root { --bg: #0f172a; --card: #1e293b; --txt: #f8fafc; --primary: #6366f1; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        body { background-color: var(--bg); color: var(--txt); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        .container { background-color: var(--card); padding: 30px; border-radius: 12px; width: 100%; max-width: 600px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        h1, p { text-align: center; margin-bottom: 10px; }
+        p { color: #94a3b8; font-size: 0.9rem; }
+        textarea { width: 100%; height: 150px; padding: 12px; background: #0f172a; border: 2px solid #334155; border-radius: 8px; color: white; margin-bottom: 15px; font-size: 1rem; }
+        .file-box { border: 2px dashed #334155; padding: 15px; text-align: center; border-radius: 8px; cursor: pointer; margin-bottom: 15px; background: #111827; }
+        button { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; }
+        .result { margin-top: 20px; padding: 15px; border-radius: 8px; text-align: center; font-weight: bold; font-size: 1.2rem; display: none; }
+        .spam { background: rgba(239, 68, 68, 0.2); border: 2px solid #ef4444; color: #fca5a5; }
+        .ham { background: rgba(34, 197, 94, 0.2); border: 2px solid #22c55e; color: #86efac; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Detector Anti-Spam</h1>
+    <p>Conectado diretamente ao modelo do seu Colab</p>
+
+    <textarea id="emailText" placeholder="Cole o texto do e-mail aqui..."></textarea>
+    
+    <div class="file-box" onclick="document.getElementById('fileInput').click()">
+        <span id="fileLabel">Ou clique para carregar um arquivo .txt</span>
+        <input type="file" id="fileInput" accept=".txt" style="display:none;">
+    </div>
+
+    <button onclick="verificarSpam()">Verificar E-mail</button>
+
+    <div id="result" class="result"></div>
+</div>
+
+<script>
+    // Lógica para ler arquivo .txt
+    document.getElementById('fileInput').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        document.getElementById('fileLabel').innerText = `Arquivo: ${file.name}`;
+        const reader = new FileReader();
+        reader.onload = function(e) { document.getElementById('emailText').value = e.target.result; };
+        reader.readAsText(file);
+    });
+
+    // Comunicação com a API Flask
+    async function verificarSpam() {
+        const texto = document.getElementById('emailText').value;
+        const resultDiv = document.getElementById('result');
+
+        if (!texto.trim()) { alert("Digite ou carregue um texto!"); return; }
+
+        resultDiv.style.display = "block";
+        resultDiv.className = "result";
+        resultDiv.innerText = "Analisando com o modelo...";
+
+        try {
+            const response = await fetch('http://localhost:5000/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ texto: texto })
+            });
+
+            const data = await response.json();
+
+            if (data.is_spam === 1) {
+                resultDiv.className = "result spam";
+                resultDiv.innerText = `🚨 É SPAM! (Certeza: ${data.probabilidade.toFixed(1)}%)`;
+            } else {
+                resultDiv.className = "result ham";
+                resultDiv.innerText = `✅ E-mail Confiável (Ham)! (Chance de Spam: ${data.probabilidade.toFixed(1)}%)`;
+            }
+        } catch (error) {
+            resultDiv.className = "result";
+            resultDiv.innerText = "Erro ao conectar no servidor Python. Certifique-se que o app.py está rodando.";
+        }
+    }
+</script>
+</body>
+</html>

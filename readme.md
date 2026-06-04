@@ -163,7 +163,7 @@ pip install pandas numpy matplotlib seaborn scikit-learn joblib jupyter
 
 ---
 
-## ▶️ Instruções para Executar o App Streamlit
+## Instruções para Executar o App Streamlit
 
 ### Pré-requisitos
 
@@ -191,18 +191,18 @@ streamlit run streamlit_app.py
 
 Acesse `http://localhost:8501` no navegador, cole o texto de um e-mail e clique em **Verificar** para obter a predição.
 
-> ⚠️ **Atenção:** os arquivos `melhor_modelo_spam.pkl` e `scaler_spam.pkl` devem estar na mesma pasta que `app.py`. Execute o notebook primeiro para gerá-los, caso ainda não existam.
+>  **Atenção:** os arquivos `melhor_modelo_spam.pkl` e `scaler_spam.pkl` devem estar na mesma pasta que `app.py`. Execute o notebook primeiro para gerá-los, caso ainda não existam.
 
 ---
 
-## 🌐 Link do App Publicado
+## Link do App Publicado
 
 > _Insira aqui o link após o deploy no Streamlit Community Cloud._  
 > Exemplo: `https://seu-usuario-deteccao-spam.streamlit.app`
 
 ---
 
-## ⚠️ Limitações
+## Limitações
 
 - **Idioma:** o modelo foi treinado em um dataset predominantemente em inglês. E-mails em português podem apresentar desempenho reduzido.
 - **Features fixas:** a extração de características é baseada em uma lista estática de 57 palavras/caracteres. Novos padrões de spam que não utilizem essas palavras podem não ser detectados.

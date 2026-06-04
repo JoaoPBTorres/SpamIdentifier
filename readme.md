@@ -212,6 +212,6 @@ Acesse `http://localhost:8501` no navegador, cole o texto de um e-mail e clique 
 
 ---
 
-## ✅ Conclusão
+## Conclusão
 
 O projeto demonstrou que é possível construir um classificador de spam eficaz utilizando técnicas clássicas de Machine Learning sobre features estatísticas de texto. A comparação sistemática entre Regressão Logística, SVM e Naive Bayes, com validação cruzada estratificada, garantiu uma seleção de modelo robusta e sem viés. O uso de pipelines do scikit-learn assegurou a integridade do processo de avaliação. O modelo final foi integrado a uma aplicação web funcional, evidenciando o ciclo completo de um projeto de Machine Learning: da exploração de dados ao deploy em produção.

@@ -73,9 +73,9 @@ O projeto foi desenvolvido seguindo as seguintes etapas:
 
 ## Modelo Final Escolhido
 
-**Regressão Logística** (`LogisticRegression`, `max_iter=1000`, `C=1.0`)
+**SVC** — Support Vector Classifier (SVC, probability=True)
 
-Apesar de o SVC ter apresentado o melhor F1-Score durante a validação cruzada, a Regressão Logística foi escolhida para produção por ser mais interpretável (coeficientes explicam a contribuição de cada feature), mais leve e rápida em inferência, e ainda assim apresentar desempenho muito competitivo. O modelo treinado foi exportado como `melhor_modelo_spam.pkl`.
+O SVC foi o modelo com melhor desempenho geral na validação cruzada, apresentando o maior F1-Score harmônico entre os três candidatos. O modelo treinado foi exportado como `melhor_modelo_spam.pkl`.
 
 ---
 
@@ -94,7 +94,7 @@ As métricas utilizadas na validação cruzada foram:
 ## Principais Resultados
 
 - O **SVC** obteve o maior F1-Score e AUC-ROC na validação cruzada.
-- A **Regressão Logística** apresentou resultados muito próximos ao SVC, sendo escolhida para deploy por sua interpretabilidade.
+- A **Regressão Logística** apresentou resultados muito próximos ao SVC.
 - O **Naive Bayes Multinomial** foi o modelo com desempenho mais modesto, especialmente em precisão.
 - Na análise de erros do modelo final sobre o conjunto de teste:
   - **Falsos negativos** (spam não detectado): expõem o usuário a riscos de fraude.
@@ -191,14 +191,11 @@ streamlit run streamlit_app.py
 
 Acesse `http://localhost:8501` no navegador, cole o texto de um e-mail e clique em **Verificar** para obter a predição.
 
->  **Atenção:** os arquivos `melhor_modelo_spam.pkl` e `scaler_spam.pkl` devem estar na mesma pasta que `app.py`. Execute o notebook primeiro para gerá-los, caso ainda não existam.
-
 ---
 
 ## Link do App Publicado
-
-> _Insira aqui o link após o deploy no Streamlit Community Cloud._  
-> Exemplo: `https://seu-usuario-deteccao-spam.streamlit.app`
+ 
+> `https://emailspam-kvtcuuwsg5cuqochfkm7c6.streamlit.app/`
 
 ---
 

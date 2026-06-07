@@ -1,9 +1,4 @@
-seaborn
-plotly
+streamlit
 scikit-learn
 joblib
-nltk
-matplotlib
 numpy
-pandas
-streamlit
